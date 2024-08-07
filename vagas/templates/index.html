@@ -1,0 +1,96 @@
+{% include 'base_index.html' %}
+{% load static %}
+
+
+{% block nav %}
+<nav>
+    <a href="{% url 'index' %}">
+        <img src="{% static 'img/logo1.svg' %}" alt="">
+    </a>
+    <div class="nav-div-button">
+        <a id="vervagas" class="nav-button" href="vagas.html">
+            Ver Vagas
+        </a>
+        <a class="nav-button" href="#">
+            Sobre Nós
+        </a>
+        <a class="nav-button" href="">
+            Sou Empresa
+        </a>
+        <a id="entrar" class="nav-button" href="{% url 'index' %}">
+            ENTRAR
+        </a>
+    </div>
+
+    <a id="nav-hamburguer" href="">
+        <i class="bi bi-list"></i>
+    </a>
+
+</nav>
+<div id="hamburguer-menu">
+    <a id="entrar" class="nav-button" href="{% url 'index' %}">
+        ENTRAR
+    </a>
+    <a class="nav-button" href="">
+        Sou Empresa
+    </a>
+    <a class="nav-button" href="#">
+        Sobre Nós
+    </a>
+    <a id="vervagas" class="nav-button" href="vagas.html">
+        Ver Vagas
+    </a>
+</div>
+{% endblock nav %}
+    
+
+{% block content %}
+<section class="landing-index">
+
+    <div class="section-content">
+
+        <div id="landing-text">
+            <h1>Explore uma Variedade de <strong>Oportunidades para Desenvolvedores.</strong></h1>
+            <h3>Junte-se a nós para explorar uma ampla gama de vagas em <strong>Front-End</strong>,
+                <strong>Back-End</strong>, <strong>Full-Stack</strong> e <strong>Mobile</strong>.
+            </h3>
+            <a href="vagas.html">VEJA NOSSAS VAGAS</a>
+        </div>
+        <img id="landing-img" src="{% static 'img/landing_img.svg' %}" alt="">
+
+    </div>
+</section>
+
+<section class="landing-empresas">
+
+    <div class="section-content">
+
+        <h2>Algumas empresas que já recrutaram pela <br> <span id="landing-empresas-title">Recruit<span
+                    id="landing-empresas-title-2"> Coders</span>:</span></h2>
+        <div id="landing-empresas-imgs">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Banco_Bradesco_logo_%28horizontal%29.png"
+                alt="Logo do Banco Bradesco">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banco_Ita%C3%BA_logo.svg/1011px-Banco_Ita%C3%BA_logo.svg.png"
+                alt="Logo da Itaú">
+            <img src="https://cdn.worldvectorlogo.com/logos/picpay-1.svg" alt="Logo da PicPay">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Nubank_logo.svg/2560px-Nubank_logo.svg.png"
+                alt="Logo da NuBank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/IFood_logo.svg/1280px-IFood_logo.svg.png"
+                alt="Logo do IFood">
+        </div>
+        <div>
+        </div>
+    </div>
+
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+<footer>
+    <img src="{% static 'img/logo2.svg' %}" alt="">
+    <h3>CodersRecruit © 2024</h3>
+    <div></div>
+</footer>
+{% endblock footer %}
+    

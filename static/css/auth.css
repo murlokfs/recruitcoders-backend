@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: #161616;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    width: 100%;
+    height: 75px;
+    background-color: transparent;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+nav a{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-weight: 700;
+    color: #0E639C;
+    text-decoration: none;
+}
+
+nav a:hover{
+    color: white;
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    color: #0E639C;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#unfixed{
+    position: static;
+}
+
+#unfixed img{
+    width: 174.19px;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 50px; /* Espaço para o nav fixo */
+    padding-bottom: 50px; /* Espaço para o footer fixo */
+    text-align: center;
+}
+
+.auth-header, .auth-body{
+    width: 400px;
+    padding: 20px;
+}
+
+.auth-header {
+    background-color: #0E639C;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.auth-body {
+    background-color: white;
+    padding-top: 5px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.auth-window{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.auth-body h3{
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    color: #a2a2a2;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.auth-body form input{
+    width: 100%;
+    background-color: #a2a2a2;
+    border: none;
+    border-radius: 25px;
+    padding: 15px;
+    font-size: 15px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+form button{
+    background-color: #0E639C;
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    margin-top: 15px;
+    color: white;
+    font-size: 16px;
+    padding: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#botao-text{
+    text-decoration: none;
+    color: white;
+}
+
+.container span{
+    margin-top: 15px;
+    font-size: 13px;
+    color:#a2a2a2;
+}
+
+.container a {
+    color: #0E639C;
+}
+
+.auth-body a {
+    font-size: 13px;
+    color: #0E639C;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.signup-progress{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.signup-progress a {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    margin-top: 15px;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-color: #0E639C;
+    border-radius: 25px;
+    width: 35px;
+    height: 35px;
+    z-index: 2;
+}
+
+hr {
+    width: 50px;
+    margin: -40px;
+    margin-top: 0;
+    margin-bottom: -5px;
+    border-color: #0E639C;
+    height: 0.1px;
+    border-style: solid;
+}
+
+#signup-stage{
+    background-color: #0E639C;
+    color: white;
+}
+
+@media screen and (max-width: 425px) {
+    .container{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    nav img{
+        display: none;
+    }
+
+    nav {
+        padding: 0;
+        justify-content: center;
+    }
+
+    nav a{
+        padding: auto;
+        padding: 30px;
+        border-radius: 25px;
+        color:#a2a2a2;
+    }
+
+    .auth-header{
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .auth-body{
+        background-color: white;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    hr {
+        width: 40px;
+    }
+
+}
