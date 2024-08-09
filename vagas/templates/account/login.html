@@ -1,0 +1,30 @@
+
+{% extends 'base_login.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="auth-window">
+        <div class="auth-header">
+            ENTRAR
+        </div>
+        <div class="auth-body">
+
+            <form form=form method="post" tags="entrance,login">
+                {% csrf_token %}
+                <h3>E-mail ou Nome de Usuário:</h3>
+                <input name="login" id="id_login" type="text">
+                <h3>Senha:</h3>
+                <input name="password" id="id_password" type="password">
+                <button type="submit">
+                    <a id="botao-text">
+                        Continuar
+                    </a>
+                </button>
+            </form>
+            <a href="{% url 'account_reset_password' %}">Esqueceu sua senha?</a>
+        </div>
+    </div>
+    <span>Não tem conta? <a href="{% url 'account_signup' %}">Registre-se</a></span>
+</div>
+{% endblock content %}
+    

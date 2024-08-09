@@ -1,0 +1,41 @@
+{% extends 'base_signup.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="auth-window">
+        <div class="auth-header">
+            REGISTRE-SE
+        </div>
+        <div class="auth-body">
+
+            <div class="signup-progress">
+                <a id="signup-stage" href="">1</a>
+                <hr>
+                <a>2</a>
+                <hr>
+                <a>3</a>
+            </div>
+
+            <form form=form method="post" tags="entrance,signup">
+                {% csrf_token %}
+                <h3>Nome Completo</h3>
+                <input name="login" id="id_login" type="text">
+                <h3>E-mail:</h3>
+                <input name="email" id="id_email" type="email">
+                <h3>Senha:</h3>
+                <input name="password1" id="id_password1" type="password">
+                <h3>Confirme sua senha:</h3>
+                <input name="password2" id="id_password2" type="password">
+                <button type="submit">
+                    <a id="botao-text">
+                        Continuar
+                    </a>
+                </button>
+            </form>
+            <span>Já possui conta? <a href="{% url 'account_login' %}">Faça Login</a></span>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

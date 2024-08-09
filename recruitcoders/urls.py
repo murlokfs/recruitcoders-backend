@@ -8,4 +8,5 @@ urlpatterns = [
     path('', Index.as_view(), name="index"),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('api/v2/', include('vagas.api.v2.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
