@@ -20,7 +20,7 @@
             <form form=form method="post" tags="entrance,signup">
                 {% csrf_token %}
                 <h3>Nome Completo</h3>
-                <input name="login" id="id_login" type="text">
+                <input name="username" id="id_username" type="text">
                 <h3>E-mail:</h3>
                 <input name="email" id="id_email" type="email">
                 <h3>Senha:</h3>
@@ -28,7 +28,7 @@
                 <h3>Confirme sua senha:</h3>
                 <input name="password2" id="id_password2" type="password">
                 <button type="submit">
-                    <a id="botao-text">
+                    <a id="botao-text" href="">
                         Continuar
                     </a>
                 </button>
