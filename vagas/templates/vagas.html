@@ -113,13 +113,11 @@
     </div>
     {% endif %}
 
-
-
     <section class="section-show-vagas">
-        <form class="vagas-filtros">
+        <form method="get" class="vagas-filtros">
             <div class="search-bar">
                 <i class="bi bi-search"></i>
-                <input placeholder="Pesquisar..." type="text">
+                <input type="text" name="titulo" value="{{ request.GET.titulo }}" id="id_titulo" placeholder="Pesquisar...">
             </div>
 
             <div id="botao-resp-filtros">
@@ -139,8 +137,6 @@
                 <h3>Nível de Experiência</h3>
                 <div class="filter-select">
                     <a href="#">Junior</a>
-                    <a href="#">Pleno</a>
-                    <a href="#">Sênior</a>
                 </div>
             </div>
             <div class="filter-section">
@@ -154,11 +150,16 @@
             <div class="filter-section">
                 <h3>Local da Vaga</h3>
                 <div class="search-bar">
-                    <select name="" id="">
-                        <option value="">Remoto/Home Office</option>
-                        <option value="">Encanto - RN</option>
-                        <option value="">Pau dos Ferros - RN</option>
-                        <option value="">Rafael Fernandes - RN</option>
+                    <select name="local" id="id_local">
+                        
+                        {% for local in locais %}
+                            <option 
+                            {% if request.GET.local == local.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                                 value="{{local.id}}">{{local.nome}}</option>
+                        {% endfor %}
+                        
                     </select>
                 </div>
             </div>
@@ -176,9 +177,11 @@
                     <p><i class="bi bi-briefcase"></i> {{vaga.empresa}}</p>
                     <p><i class="bi bi-geo-alt"></i> {{vaga.local}}</p>
                     <div class="vaga-tags">
-                        {% for tag in vaga.tags.all %}
-                            <p>{{tag.nome}}</p>
+                        <p>{{vaga.get_experiencia_display}}</p>
+                        {% for stack in vaga.stack.all %}
+                            <p>{{stack.nome}}</p>
                         {% endfor %}
+                        <p>{{vaga.empresa.get_tipo_display}}</p>
                     </div>
                 </div>
             </a>

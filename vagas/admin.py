@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vaga, Empresa, Tag
+from .models import Vaga, Empresa, Stack, Local
 
 @admin.register(Vaga)
 class Vaga(admin.ModelAdmin):
@@ -9,8 +9,12 @@ class Vaga(admin.ModelAdmin):
 class Empresa(admin.ModelAdmin):
     list_display = ["nome", "email"]
 
-@admin.register(Tag)
-class Tag(admin.ModelAdmin):
+@admin.register(Local)
+class Local(admin.ModelAdmin):
+    pass
+
+@admin.register(Stack)
+class Stack(admin.ModelAdmin):
     pass
 
 # Register your models here.
