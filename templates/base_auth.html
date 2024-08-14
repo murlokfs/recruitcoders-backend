@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Recruit Coders</title>
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
@@ -20,7 +24,7 @@
         </a>
         <img src="{% static 'img/logo3.svg' %}" alt="">
     </nav>
-    
+
     {% block content %}
 
     {% endblock content %}

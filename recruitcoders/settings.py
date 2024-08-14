@@ -122,6 +122,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = 'media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -139,8 +142,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
 
-
 }
 
-LOGOUT_REDIRECT_URL = ""
-SIGNUP_REDIRECT_URL = ""
+LOGIN_REDIRECT_URL = "/vagas"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+SIGNUP_REDIRECT_URL = "/vagas"

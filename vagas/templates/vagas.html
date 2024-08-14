@@ -1,0 +1,203 @@
+{% include 'base_vagas.html' %}
+
+{% load static %}
+
+{% block nav %}
+
+
+{% if user.is_authenticated %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userButton = document.querySelector("#user-button");
+        const userDropdown = document.querySelector("#user-dropdown");
+
+        // Initialize Popper.js
+        const popperInstance = Popper.createPopper(userButton, userDropdown, {
+            placement: 'bottom-end',
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 0],
+                    },
+                },
+            ],
+        });
+
+        // Toggle dropdown visibility
+        userButton.addEventListener("click", function () {
+            userDropdown.classList.toggle("hidden");
+            if (!userDropdown.classList.contains("hidden")) {
+                popperInstance.update();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add("hidden");
+            }
+        });
+    });
+</script>
+<nav>
+    <a href="{% url 'index' %}">
+        <img src="{% static 'img/logo1.svg' %}" alt="">
+        <img id="img_resp" src="{% static 'img/logo_resp.svg' %}" alt="">
+    </a>
+    <div id="logged-nav" class="nav-div-button">
+        <a id="notification-button">
+            <i class="bi bi-bell"></i>
+        </a>
+        <div id="user-menu-container" class="nav-button">
+            <a id="user-button" class="nav-button">
+                <i class="bi bi-person-circle"></i>
+                <p>{{ request.user }}</p>
+            </a>
+            <div id="user-dropdown" class="dropdown hidden" role="menu">
+                <a href="#">Perfil</a>
+                <a href="#">Candidaturas</a>
+                <a href="{% url 'account_logout' %}">Sair</a>
+            </div>
+        </div>
+    </div>
+</nav>
+{% else %}
+<nav>
+    <a href="{% url 'index' %}">
+        <img src="{% static 'img/logo1.svg' %}" alt="">
+    </a>
+    <div class="nav-div-button">
+        <a class="nav-button" href="">
+            Sou Empresa
+        </a>
+        <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
+            ENTRAR
+        </a>
+    </div>
+
+    <a id="nav-hamburguer" href="">
+        <i class="bi bi-list"></i>
+    </a>
+</nav>
+<div id="hamburguer-menu">
+    <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
+        ENTRAR
+    </a>
+    <a class="nav-button" href="">
+        Sou Empresa
+    </a>
+</div>
+{% endif %}
+
+
+
+{% endblock nav %}
+
+
+{% block content %}
+
+<section class="section-vagas">
+    <h1>Confira as atuais vagas para Desenvolvedores</h1>
+
+
+    {% if user.is_authenticated %}
+
+    {% else %}
+    <div id="vagas-notification">
+        <i class="bi bi-bell-fill"></i>
+        <div id="vagas-notification-message">
+            <h2>Faça Login para receber notificações de vagas perfeitas para o seu perfil!</h2>
+            <a href="{% url 'account_login' %}"><strong>Entre</strong> ou <strong>Cadastre-se</strong></a>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+    <section class="section-show-vagas">
+        <form class="vagas-filtros">
+            <div class="search-bar">
+                <i class="bi bi-search"></i>
+                <input placeholder="Pesquisar..." type="text">
+            </div>
+
+            <div id="botao-resp-filtros">
+                <i class="bi bi-filter"></i>
+                <p>Filtrar</p>
+            </div>
+
+            <div class="filter-section">
+                <h3>Tipo de Contrato</h3>
+                <div class="filter-select">
+                    <a href="#">CLT</a>
+                    <a href="#">PJ</a>
+                    <a href="#">Estágio</a>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Nível de Experiência</h3>
+                <div class="filter-select">
+                    <a href="#">Junior</a>
+                    <a href="#">Pleno</a>
+                    <a href="#">Sênior</a>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Tipo de Empresa</h3>
+                <div class="filter-select">
+                    <a href="#">Start-Up</a>
+                    <a href="#">Pequena/Média Empresa</a>
+                    <a href="#">Grande Empresa</a>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Local da Vaga</h3>
+                <div class="search-bar">
+                    <select name="" id="">
+                        <option value="">Remoto/Home Office</option>
+                        <option value="">Encanto - RN</option>
+                        <option value="">Pau dos Ferros - RN</option>
+                        <option value="">Rafael Fernandes - RN</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <div class="area-vagas">
+
+            {% for vaga in vagas %}
+
+            <a href="" class="vaga">
+                <img src="{{vaga.empresa.imagem.url}}" alt="">
+                <div class="vaga-info">
+                    <h3>{{vaga.titulo}}</h3>
+                    <p><i class="bi bi-cash-stack"></i> Até R${{vaga.salario}}</p>
+                    <p><i class="bi bi-briefcase"></i> {{vaga.empresa}}</p>
+                    <p><i class="bi bi-geo-alt"></i> {{vaga.local}}</p>
+                    <div class="vaga-tags">
+                        {% for tag in vaga.tags.all %}
+                            <p>{{tag.nome}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </a>
+
+            {% endfor %}
+
+        </div>
+    </section>
+</section>
+
+{% endblock content %}
+
+
+{% block footer %}
+
+<footer>
+    <img src="{% static 'img/logo2.svg' %}" alt="">
+    <h3>CodersRecruit © 2024</h3>
+    <div></div>
+</footer>
+
+{% endblock footer %}
