@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, TemplateView
-from .models import Vaga, Stack, Local
+from .models import Vaga, Stack, Local, Empresa
 from .filters import VagaFilter
 
 class Index(TemplateView):
@@ -20,6 +20,8 @@ class VagaListView(ListView):
         context = super().get_context_data(**kwargs)
         context["filter"] = VagaFilter(self.request.GET, self.get_queryset())
         context["locais"] = Local.objects.all()
+        context["f_contratos"] = self.request.GET.getlist('contrato')
+        context["f_experiencias"] = self.request.GET.getlist('experiencia')
         return context
 
     

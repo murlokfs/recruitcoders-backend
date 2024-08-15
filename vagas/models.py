@@ -36,6 +36,12 @@ class Vaga(models.Model):
         ("senior", "Sênior"),
     )
 
+    CONTRATOS = (
+        ("clt", "CLT"),
+        ("pj", "PJ"),
+        ("estagio", "Estágio")
+    )
+
     titulo = models.CharField(max_length=30)
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     salario = models.DecimalField(max_digits=6,decimal_places=2)
@@ -44,6 +50,7 @@ class Vaga(models.Model):
     local = models.ForeignKey(Local, on_delete=models.CASCADE, blank=True)
     experiencia = models.CharField(max_length=6, choices=NIVEIS, default=NIVEIS[0:0])
     stack = models.ManyToManyField(Stack, verbose_name="Stacks", blank=True)
+    contrato = models.CharField(max_length=7, choices=CONTRATOS, default=CONTRATOS[0:0])
 
     valido_ate = models.DateField()
     criado_em = models.DateField(auto_now_add=True)

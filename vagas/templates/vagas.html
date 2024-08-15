@@ -117,52 +117,85 @@
         <form method="get" class="vagas-filtros">
             <div class="search-bar">
                 <i class="bi bi-search"></i>
-                <input type="text" name="titulo" value="{{ request.GET.titulo }}" id="id_titulo" placeholder="Pesquisar...">
+                <input type="text" name="titulo" value="{{ request.GET.titulo }}" id="id_titulo"
+                    placeholder="Pesquisar...">
             </div>
 
             <div id="botao-resp-filtros">
                 <i class="bi bi-filter"></i>
                 <p>Filtrar</p>
             </div>
-
+                
             <div class="filter-section">
                 <h3>Tipo de Contrato</h3>
-                <div class="filter-select">
-                    <a href="#">CLT</a>
-                    <a href="#">PJ</a>
-                    <a href="#">Estágio</a>
+                <div class="filter-select" id="contrato">
+                    <label>
+                        <input type="checkbox" name="contrato" value="clt" id="clt"
+                        
+                        {% if 'clt' in f_contratos %}
+                            checked
+                        {% endif %}
+                            >
+                        CLT
+                    </label>
+                    <label>
+                        <input type="checkbox" name="contrato" value="pj" id="pj"
+                        
+                        {% if 'pj' in f_contratos %}
+                            checked
+                        {% endif %}
+                            >
+                        PJ
+                    </label>
+                    <label>
+                        <input type="checkbox" name="contrato" value="estagio" id="estagio"
+                        
+                        {% if 'estagio' in f_contratos %}
+                            checked
+                        {% endif %}
+                            >
+                        Estágio
+                    </label>
                 </div>
             </div>
             <div class="filter-section">
                 <h3>Nível de Experiência</h3>
-                <div class="filter-select">
-                    <a href="#">Junior</a>
-                </div>
-            </div>
-            <div class="filter-section">
-                <h3>Tipo de Empresa</h3>
-                <div class="filter-select">
-                    <a href="#">Start-Up</a>
-                    <a href="#">Pequena/Média Empresa</a>
-                    <a href="#">Grande Empresa</a>
+                <div class="filter-select" id="experiencia">
+                    <label>
+                        <input type="checkbox" name="experiencia" value="junior"
+                        {% if 'junior' in f_experiencias %}
+                            checked
+                        {% endif %}
+                        >
+                        Junior
+                    </label>
+                    <label>
+                        <input type="checkbox" name="experiencia" value="pleno"
+                        {% if 'pleno' in f_experiencias %}
+                            checked
+                        {% endif %}
+                        >
+                        Pleno
+                    </label>
+                    <label>
+                        <input type="checkbox" name="experiencia" value="senior"
+                        {% if 'senior' in f_experiencias %}
+                            checked
+                        {% endif %}
+                        >
+                        Senior
+                    </label>
                 </div>
             </div>
             <div class="filter-section">
                 <h3>Local da Vaga</h3>
                 <div class="search-bar">
-                    <select name="local" id="id_local">
-                        
-                        {% for local in locais %}
-                            <option 
-                            {% if request.GET.local == local.id|stringformat:"s" %}
-                                selected
-                            {% endif %}
-                                 value="{{local.id}}">{{local.nome}}</option>
-                        {% endfor %}
-                        
-                    </select>
+                    <input type="text" name="local" value="{{ request.GET.local }}" id="id_local"
+                        placeholder="Cidade...">
                 </div>
             </div>
+            <button style="display: none;" type="submit">
+            </button>
         </form>
 
         <div class="area-vagas">
@@ -179,9 +212,10 @@
                     <div class="vaga-tags">
                         <p>{{vaga.get_experiencia_display}}</p>
                         {% for stack in vaga.stack.all %}
-                            <p>{{stack.nome}}</p>
+                        <p>{{stack.nome}}</p>
                         {% endfor %}
                         <p>{{vaga.empresa.get_tipo_display}}</p>
+                        <p>{{vaga.get_contrato_display}}</p>
                     </div>
                 </div>
             </a>
