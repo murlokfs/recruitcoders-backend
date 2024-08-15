@@ -10,6 +10,7 @@ class VagaListView(ListView):
     model = Vaga
     template_name = "vagas.html"
     context_object_name = "vagas"
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = Vaga.objects.filter(is_ativo=True)

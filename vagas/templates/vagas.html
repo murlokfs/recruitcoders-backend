@@ -118,7 +118,7 @@
             <div class="search-bar">
                 <i class="bi bi-search"></i>
                 <input type="text" name="titulo" value="{{ request.GET.titulo }}" id="id_titulo"
-                    placeholder="Pesquisar...">
+                    placeholder="Nome da Vaga...">
             </div>
 
             <div id="botao-resp-filtros">
@@ -221,6 +221,82 @@
             </a>
 
             {% endfor %}
+
+            <div class="pagination">
+                <!-- Primeira Página -->
+                {% if page_obj.has_previous %}
+                    <a href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">‹ Primeiro</a>
+                {% else %}
+                    <span class="page-link disabled">‹ Primeiro</span>
+                {% endif %}
+            
+                <!-- Página Anterior -->
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">‹ Anterior</a>
+                {% else %}
+                    <span class="page-link disabled">‹ Anterior</span>
+                {% endif %}
+            
+                <!-- Páginas Numéricas -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if num == page_obj.number %}
+                        <span class="page-link current">{{ num }}</span>
+                    {% else %}
+                        <a href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+            
+                <!-- Página Seguinte -->
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Próximo ›</a>
+                {% else %}
+                    <span class="page-link disabled">Próximo ›</span>
+                {% endif %}
+            
+                <!-- Última Página -->
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Último ›</a>
+                {% else %}
+                    <span class="page-link disabled">Último ›</span>
+                {% endif %}
+            </div>
+
+            <style>
+                .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #0E639C;
+    background-color: white;
+    border: solid 1px #0E639C;
+}
+
+.page-link:hover {
+    background-color: #0E639C;
+    color: white;
+}
+
+.page-link.disabled {
+    color: #a2a2a2;
+    border-color: #a2a2a2;
+    pointer-events: none;
+}
+
+.page-link.current {
+    background-color: #0E639C;
+    color: white;
+    border-color: #0E639C;
+}
+            </style>
 
         </div>
     </section>
