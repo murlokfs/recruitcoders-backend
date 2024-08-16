@@ -19,11 +19,6 @@ class Empresa(models.Model):
     def get_tipo_display(self):
         return dict(self.TIPOEMPRESA).get(self.tipo, self.tipo)
 
-class Stack(models.Model):
-    nome = models.CharField(max_length=15)
-    def __str__(self):
-        return self.nome
-    
 class Local(models.Model):
     nome = models.CharField(max_length=30)
     def __str__(self):
@@ -42,6 +37,14 @@ class Vaga(models.Model):
         ("estagio", "Estágio")
     )
 
+    STACKS = (
+        ("python", "Python"),
+        ("javascript", "JavaScript"),
+        ("java", "Java"),
+        ("csharp", "C#"),
+        ("cplus", "C++"),
+    )
+
     titulo = models.CharField(max_length=30)
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     salario = models.DecimalField(max_digits=6,decimal_places=2)
@@ -49,7 +52,7 @@ class Vaga(models.Model):
 
     local = models.ForeignKey(Local, on_delete=models.CASCADE, blank=True)
     experiencia = models.CharField(max_length=6, choices=NIVEIS, default=NIVEIS[0:0])
-    stack = models.ManyToManyField(Stack, verbose_name="Stacks", blank=True)
+    stack = models.CharField(max_length=10, choices=STACKS, default=STACKS[0:0])
     contrato = models.CharField(max_length=7, choices=CONTRATOS, default=CONTRATOS[0:0])
 
     valido_ate = models.DateField()

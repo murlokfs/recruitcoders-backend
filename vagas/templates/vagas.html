@@ -2,6 +2,12 @@
 
 {% load static %}
 
+
+{% block title %}
+    <title>Recruit Coders</title>
+{% endblock title %}
+    
+
 {% block nav %}
 
 
@@ -131,7 +137,6 @@
                 <div class="filter-select" id="contrato">
                     <label>
                         <input type="checkbox" name="contrato" value="clt" id="clt"
-                        
                         {% if 'clt' in f_contratos %}
                             checked
                         {% endif %}
@@ -140,7 +145,6 @@
                     </label>
                     <label>
                         <input type="checkbox" name="contrato" value="pj" id="pj"
-                        
                         {% if 'pj' in f_contratos %}
                             checked
                         {% endif %}
@@ -149,7 +153,6 @@
                     </label>
                     <label>
                         <input type="checkbox" name="contrato" value="estagio" id="estagio"
-                        
                         {% if 'estagio' in f_contratos %}
                             checked
                         {% endif %}
@@ -188,6 +191,23 @@
                 </div>
             </div>
             <div class="filter-section">
+                <h3>Habilidades</h3>
+                <div class="filter-select" id="stack">
+                    
+                    {% for stack in stacks %}
+                    <label>
+                        <input type="checkbox" name="stack" value="{{stack.0}}"
+                        {% if stack.0 in f_stacks %}
+                            checked
+                        {% endif %}
+                        >
+                        {{stack.1}}
+                    </label>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+            <div class="filter-section">
                 <h3>Local da Vaga</h3>
                 <div class="search-bar">
                     <input type="text" name="local" value="{{ request.GET.local }}" id="id_local"
@@ -202,7 +222,7 @@
 
             {% for vaga in vagas %}
 
-            <a href="" class="vaga">
+            <a href="{% url 'vaga-detail-page' vaga.id %}" class="vaga">
                 <img src="{{vaga.empresa.imagem.url}}" alt="">
                 <div class="vaga-info">
                     <h3>{{vaga.titulo}}</h3>
@@ -211,9 +231,7 @@
                     <p><i class="bi bi-geo-alt"></i> {{vaga.local}}</p>
                     <div class="vaga-tags">
                         <p>{{vaga.get_experiencia_display}}</p>
-                        {% for stack in vaga.stack.all %}
-                        <p>{{stack.nome}}</p>
-                        {% endfor %}
+                        <p>{{vaga.get_stack_display}}</p>
                         <p>{{vaga.empresa.get_tipo_display}}</p>
                         <p>{{vaga.get_contrato_display}}</p>
                     </div>

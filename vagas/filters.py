@@ -6,7 +6,8 @@ class VagaFilter(django_filters.FilterSet):
     local = django_filters.CharFilter(field_name='local__nome', lookup_expr='icontains')
     experiencia = django_filters.MultipleChoiceFilter(choices=Vaga.NIVEIS)
     contrato = django_filters.MultipleChoiceFilter(choices=Vaga.CONTRATOS)
+    stack = django_filters.MultipleChoiceFilter(choices=Vaga.STACKS)
 
     class Meta:
         model = Vaga
-        fields = ['titulo', 'local', 'experiencia', 'contrato']
+        fields = ['titulo', 'local', 'experiencia', 'contrato', 'stack']
