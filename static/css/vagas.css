@@ -466,7 +466,6 @@ input:focus, select:focus{
     background-color: #0E639C;
     border-radius: 25px;
     height: 100%;
-    width: 20%;
 }
 
 .candidatura-actions{
@@ -515,9 +514,18 @@ input:focus, select:focus{
     width: 100%;
 }
 
+#header-back{
+    background-color: rgb(126, 156, 244);
+    height: 300px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+}
+
 #vaga-header{
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     align-content: center;
     margin: 30px;
@@ -539,8 +547,23 @@ input:focus, select:focus{
     font-size: 18px;
 }
 
-#vaga-header div{
-    margin-top: -20px;
+#header-front{
+    margin-top: -100px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+hr{
+    border-width: 0.1px;
+    border-color: rgb(232, 232, 232);
+    border-style: solid;
+}
+
+#header-front h1{
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 #vaga-desc{
@@ -553,7 +576,6 @@ input:focus, select:focus{
     flex-direction: column;
     align-items: center;
     align-content: center;
-    width: 100%;
     text-align: center;
     margin: 30px;
 }

@@ -1,17 +1,9 @@
-{% include 'base_vagas.html' %}
+{% include 'base_candidaturas.html' %}
 
 {% load static %}
 
 
-{% block title %}
-    <title>Recruit Coders</title>
-{% endblock title %}
-    
-
 {% block nav %}
-
-
-{% if user.is_authenticated %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const userButton = document.querySelector("#user-button");
@@ -58,9 +50,9 @@
         <div id="user-menu-container" class="nav-button">
             <a id="user-button" class="nav-button">
                 <i class="bi bi-person-circle"></i>
-                <p>{{ request.user }}</p>
+                <p>{{request.user}}</p>
             </a>
-            <div id="user-dropdown" class="dropdown hidden" role="menu">
+            <div id="user-dropdown" class="dropdown hidden">
                 <a href="#">Perfil</a>
                 <a href="{% url 'candidaturas' %}">Candidaturas</a>
                 <a href="{% url 'account_logout' %}">Sair</a>
@@ -68,56 +60,13 @@
         </div>
     </div>
 </nav>
-{% else %}
-<nav>
-    <a href="{% url 'index' %}">
-        <img src="{% static 'img/logo1.svg' %}" alt="">
-    </a>
-    <div class="nav-div-button">
-        <a class="nav-button" href="">
-            Sou Empresa
-        </a>
-        <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
-            ENTRAR
-        </a>
-    </div>
-
-    <a id="nav-hamburguer" href="">
-        <i class="bi bi-list"></i>
-    </a>
-</nav>
-<div id="hamburguer-menu">
-    <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
-        ENTRAR
-    </a>
-    <a class="nav-button" href="">
-        Sou Empresa
-    </a>
-</div>
-{% endif %}
-
-
-
 {% endblock nav %}
-
+    
 
 {% block content %}
-
 <section class="section-vagas">
-    <h1>Confira as atuais vagas para Desenvolvedores</h1>
-
-
-    {% if user.is_authenticated %}
-
-    {% else %}
-    <div id="vagas-notification">
-        <i class="bi bi-bell-fill"></i>
-        <div id="vagas-notification-message">
-            <h2>Faça Login para receber notificações de vagas perfeitas para o seu perfil!</h2>
-            <a href="{% url 'account_login' %}"><strong>Entre</strong> ou <strong>Cadastre-se</strong></a>
-        </div>
-    </div>
-    {% endif %}
+    <h1>Suas candidaturas</h1>
+    <h3 id="title-desc">Acompanhe o andamento de suas candidaturas.</h3>
 
     <section class="section-show-vagas">
         <form method="get" class="vagas-filtros">
@@ -218,117 +167,55 @@
             </button>
         </form>
 
+        
+        {% for candidatura in candidaturas %}
+            
         <div class="area-vagas">
-
-            {% for vaga in vagas %}
-
-            <a href="{% url 'vaga-detail-page' vaga.id %}" class="vaga">
-                <img src="{{vaga.empresa.imagem.url}}" alt="">
-                <div class="vaga-info">
-                    <h3>{{vaga.titulo}}</h3>
-                    <p><i class="bi bi-cash-stack"></i> Até R${{vaga.salario}}</p>
-                    <p><i class="bi bi-briefcase"></i> {{vaga.empresa}}</p>
-                    <p><i class="bi bi-geo-alt"></i> {{vaga.local}}</p>
-                    <div class="vaga-tags">
-                        <p>{{vaga.get_experiencia_display}}</p>
-                        <p>{{vaga.get_stack_display}}</p>
-                        <p>{{vaga.empresa.get_tipo_display}}</p>
-                        <p>{{vaga.get_contrato_display}}</p>
+            
+            <div class="vaga">
+                <div id="candidatura-info" class="vaga-info">
+                    <h3>{{candidatura.vaga.titulo}}</h3>
+                    <div class="candidatura-icons">
+                        <p><i class="bi bi-briefcase"></i> {{candidatura.vaga.empresa}}</p>
+                        <p><i class="bi bi-geo-alt"></i> {{candidatura.vaga.local}}</p>
                     </div>
+                    <div class="candidatura-progress-area">
+                        <div class="progress-desc">
+                            <p>Progresso</p>
+                            <p>{{candidatura.etapa}}/{{candidatura.vaga.qntd_etapas}} Etapa(s)</p>
+                        </div>
+                        <div class="progress-out">
+                            <div style="width: {{candidatura.progresso}}%;" class="progress-in">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if candidatura.is_ativa == True %}
+                        
+                        
+                    <div class="candidatura-actions">
+                        <a href="">Desistir da Vaga</a>
+                        <a id="candidatura-details" href="">Ver Andamento</a>
+                    </div>
+                    
+                    {% endif %}
                 </div>
             </a>
-
-            {% endfor %}
-
-            <div class="pagination">
-                <!-- Primeira Página -->
-                {% if page_obj.has_previous %}
-                    <a href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">‹ Primeiro</a>
-                {% else %}
-                    <span class="page-link disabled">‹ Primeiro</span>
-                {% endif %}
-            
-                <!-- Página Anterior -->
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">‹ Anterior</a>
-                {% else %}
-                    <span class="page-link disabled">‹ Anterior</span>
-                {% endif %}
-            
-                <!-- Páginas Numéricas -->
-                {% for num in page_obj.paginator.page_range %}
-                    {% if num == page_obj.number %}
-                        <span class="page-link current">{{ num }}</span>
-                    {% else %}
-                        <a href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">{{ num }}</a>
-                    {% endif %}
-                {% endfor %}
-            
-                <!-- Página Seguinte -->
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Próximo ›</a>
-                {% else %}
-                    <span class="page-link disabled">Próximo ›</span>
-                {% endif %}
-            
-                <!-- Última Página -->
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Último ›</a>
-                {% else %}
-                    <span class="page-link disabled">Último ›</span>
-                {% endif %}
-            </div>
-
-            <style>
-                .pagination {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.page-link {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 0 5px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #0E639C;
-    background-color: white;
-    border: solid 1px #0E639C;
-}
-
-.page-link:hover {
-    background-color: #0E639C;
-    color: white;
-}
-
-.page-link.disabled {
-    color: #a2a2a2;
-    border-color: #a2a2a2;
-    pointer-events: none;
-}
-
-.page-link.current {
-    background-color: #0E639C;
-    color: white;
-    border-color: #0E639C;
-}
-            </style>
-
         </div>
+
+        
+        {% endfor %}
+            
     </section>
 </section>
 
 {% endblock content %}
 
-
 {% block footer %}
-
 <footer>
     <img src="{% static 'img/logo2.svg' %}" alt="">
     <h3>CodersRecruit © 2024</h3>
     <div></div>
 </footer>
-
 {% endblock footer %}
+    

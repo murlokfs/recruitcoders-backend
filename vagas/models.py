@@ -1,3 +1,4 @@
+from typing import Iterable
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -20,10 +21,12 @@ class Empresa(models.Model):
         return dict(self.TIPOEMPRESA).get(self.tipo, self.tipo)
 
 class Local(models.Model):
-    nome = models.CharField(max_length=30)
-    def __str__(self):
-        return self.nome
+    cidade = models.CharField(max_length=30)
+    estado = models.CharField(max_length=2)
 
+    def __str__(self):
+        return f'{self.cidade} - {self.estado}'
+    
 class Vaga(models.Model):
     NIVEIS = (
         ("junior", "Júnior"),
@@ -55,13 +58,29 @@ class Vaga(models.Model):
     stack = models.CharField(max_length=10, choices=STACKS, default=STACKS[0:0])
     contrato = models.CharField(max_length=7, choices=CONTRATOS, default=CONTRATOS[0:0])
 
-    valido_ate = models.DateField()
-    criado_em = models.DateField(auto_now_add=True)
+    valido_ate = models.DateTimeField()
+    criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateField(auto_now=True)
 
+    qntd_etapas = models.IntegerField()
     is_ativo = models.BooleanField(default=True)
-    candidaturas = models.ManyToManyField(User, blank=True)
+    qntd_candidaturas = models.IntegerField()
 
     def __str__(self):
         return self.titulo
 
+class Candidatura(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.CASCADE)
+    candidato = models.ForeignKey(User, on_delete=models.CASCADE)
+    etapa = models.IntegerField()
+    is_ativa = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.vaga}: {self.candidato} -  Etapa: {self.etapa}/{self.vaga.qntd_etapas}'
+    
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.vaga.qntd_candidaturas += 1
+            self.vaga.save(update_fields=['qntd_candidaturas'])
+
+        return super().save(*args, **kwargs)

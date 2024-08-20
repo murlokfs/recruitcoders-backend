@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidaturas</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'css/vagas.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+</head>
+
+<body>
+
+    
+    {% block nav %}
+        
+    {% endblock nav %}
+
+    
+    {% block content %}
+        
+
+    {% endblock content %}
+    
+    {% block footer %}
+        
+
+
+    {% endblock footer %}
+
+    <script>
+        function handleResize() {
+            const filterSections = document.querySelectorAll('.filter-section');
+            const filterButton = document.getElementById('botao-resp-filtros');
+
+            if (window.innerWidth > 728) {
+                filterSections.forEach(section => {
+                    section.classList.remove('hidden');
+                });
+                filterButton.classList.add('hidden');
+            } else {
+                filterSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                filterButton.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('botao-resp-filtros').addEventListener('click', function () {
+            const filterSections = document.querySelectorAll('.filter-section');
+            filterSections.forEach(section => {
+                section.classList.toggle('hidden');
+            });
+        });
+
+        window.addEventListener('resize', handleResize);
+        document.addEventListener('DOMContentLoaded', handleResize);
+
+        // User menu dropdown functionality with Popper.js
+        document.getElementById('user-button').addEventListener('click', function () {
+            const userDropdown = document.getElementById('user-dropdown');
+            userDropdown.classList.toggle('hidden');
+            Popper.createPopper(document.getElementById('user-button'), userDropdown, {
+                placement: 'bottom-end',
+            });
+        });
+    </script>
+</body>
+
+</html>
