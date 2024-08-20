@@ -7,6 +7,40 @@
 {% load static %}
 
 {% block nav %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userButton = document.querySelector("#user-button");
+        const userDropdown = document.querySelector("#user-dropdown");
+
+        // Initialize Popper.js
+        const popperInstance = Popper.createPopper(userButton, userDropdown, {
+            placement: 'bottom-end',
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 0],
+                    },
+                },
+            ],
+        });
+
+        // Toggle dropdown visibility
+        userButton.addEventListener("click", function () {
+            userDropdown.classList.toggle("hidden");
+            if (!userDropdown.classList.contains("hidden")) {
+                popperInstance.update();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add("hidden");
+            }
+        });
+    });
+</script>
 <nav>
     <a href="{% url 'index' %}">
         <img src="{% static 'img/logo1.svg' %}" alt="">
@@ -61,6 +95,9 @@
                 <p><i class="bi bi-cash-stack"></i> Até R${{ vaga.salario }}</p>
                 <p><i class="bi bi-geo-alt"></i> {{ vaga.local }}</p>
                 <hr>
+                <p>
+                    {{vaga.descricao}}
+                </p>
                 <h3>Sobre a Empresa:</h3>
                 <p>Somos uma empresa inovadora no setor de tecnologia, dedicada a oferecer soluções digitais de alta
                     qualidade para nossos clientes. Valorizamos o desenvolvimento profissional contínuo e oferecemos um

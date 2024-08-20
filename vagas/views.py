@@ -62,4 +62,4 @@ class CandidaturaListView(LoginRequiredMixin,FilterView):
             candidatura.progresso = progresso
         return context
 
-    
+#   FAZER FORMULARIO DE INSCRIÇÃO E DASHBOARD
