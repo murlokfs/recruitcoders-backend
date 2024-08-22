@@ -5,23 +5,25 @@ from django.contrib.auth.models import User
 
 class Curriculo(models.Model):
     FORMACOES = (
-        (1, "Ensino Fundamental Incompleto"),
-        (2, "Ensino Fundamental Completo"),
-        (3, "Ensino Médio Incompleto"),
-        (4, "Ensino Médio Completo"),
-        (5, "Ensino Médio Técnico Incompleto"),
-        (6, "Ensino Médio Técnico Completo"),
-        (7, "Ensino Superior Incompleto"),
-        (8, "Ensino Superior Completo"),
+        ("ensino_fi", "Ensino Fundamental Incompleto"),
+        ("ensino_fc", "Ensino Fundamental Completo"),
+        ("ensino_mi", "Ensino Médio Incompleto"),
+        ("ensino_mc", "Ensino Médio Completo"),
+        ("ensino_mti", "Ensino Médio Técnico Incompleto"),
+        ("ensino_mtc", "Ensino Médio Técnico Completo"),
+        ("ensino_si", "Ensino Superior Incompleto"),
+        ("ensino_sc", "Ensino Superior Completo"),
     )
 
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     nome_completo = models.CharField(max_length=50, blank=True)
-    data_nascimento = models.DateField(auto_now=False, auto_now_add=False, blank=True)
     sobre_mim = models.TextField(blank=True)
     formacao = models.CharField(max_length=22, choices=FORMACOES, blank=True)
     habilidades = models.TextField(blank=True)
+    atualizado_em = models.DateTimeField(auto_now=False, null=True)
 
+    def __str__(self):
+        return self.usuario.username
 
 class Empresa(models.Model):
     TIPOEMPRESA = (
@@ -32,6 +34,7 @@ class Empresa(models.Model):
 
     nome = models.CharField(max_length=50)
     imagem = models.ImageField(upload_to="empresas", blank=True)
+    colaboradores = models.ManyToManyField(User)
     email = models.EmailField()
     tipo = models.CharField(
         max_length=20, choices=TIPOEMPRESA, default=TIPOEMPRESA[0:0]
@@ -85,7 +88,6 @@ class Vaga(models.Model):
 
     qntd_etapas = models.IntegerField()
     is_ativo = models.BooleanField(default=True)
-    qntd_candidaturas = models.IntegerField()
 
     def __str__(self):
         return self.titulo
@@ -99,10 +101,3 @@ class Candidatura(models.Model):
 
     def __str__(self):
         return f"{self.vaga}: {self.candidato} -  Etapa: {self.etapa}/{self.vaga.qntd_etapas}"
-
-    def save(self, *args, **kwargs):
-        if self.pk is None:
-            self.vaga.qntd_candidaturas += 1
-            self.vaga.save(update_fields=["qntd_candidaturas"])
-
-        return super().save(*args, **kwargs)

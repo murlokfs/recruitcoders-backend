@@ -1,25 +1,19 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}{% endblock title %}
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-
-    <link rel="stylesheet" href="{% static 'css/vagas.css' %}">
+    <title>{% block title %}Recruit Coders{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/curriculo.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-
-    <script src="{% static 'js/nav.js' %}"></script>
-    {% block extra_head %}
-    {% endblock extra_head %}
 </head>
 
 <body>
-    {% if user.is_authenticated %}
+    
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const userButton = document.querySelector("#user-button");
@@ -75,43 +69,17 @@
                 </div>
             </div>
         </div>
-    </nav>
-    {% else %}
-    <nav>
-        <a href="{% url 'index' %}">
-            <img src="{% static 'img/logo1.svg' %}" alt="">
-        </a>
-        <div class="nav-div-button">
-            <a class="nav-button" href="">
-                Sou Empresa
-            </a>
-            <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
-                ENTRAR
-            </a>
-        </div>
-    
-        <a id="nav-hamburguer" href="">
-            <i class="bi bi-list"></i>
-        </a>
-    </nav>
-    <div id="hamburguer-menu">
-        <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
-            ENTRAR
-        </a>
-        <a class="nav-button" href="">
-            Sou Empresa
-        </a>
-    </div>
-    {% endif %}
+    </nav>  
+        
 
-    {% block content %}
-    {% endblock content %}
+        {% block content %}
+        {% endblock content %}
 
-
-    {% block footer %}
-
-    {% endblock footer %}
-
+    <footer>
+        <img src="{% static 'img/logo2.svg' %}" alt="Logo">
+        <h3>CodersRecruit © 2024</h3>
+        <div></div>
+    </footer>
 
     <script>
         function handleResize() {
@@ -156,9 +124,6 @@
             display: none;
         }
     </style>
-
-    {% block extra_js %}
-    {% endblock extra_js %}
 </body>
 
 </html>

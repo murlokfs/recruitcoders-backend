@@ -1,0 +1,31 @@
+{% extends 'base_curriculo.html' %}
+
+{% block title %}
+<title>Confirmar Candidatura</title>
+{% endblock title %}
+
+{% load static %}
+
+
+{% block content %}
+
+<section class="section-vagas">
+    <section class="section-vagas-info">
+        <div id="area-info">
+            <div id="vaga-desc">
+            <h2>Confirmar Candidatura</h2>
+            <p>Você está prestes a se candidatar para esta vaga.</p>
+            <form method="post">
+                {% csrf_token %}
+                <div style="margin-bottom: 0;" id="vaga-candidatar">
+                    <button type="submit">Prosseguir</button>
+                    <a href="{% url 'vaga-list-page' %}" class="btn-cancelar">Cancelar</a>
+                </div>
+                
+            </form>
+            </div>
+        </div>
+    </section>
+</section>
+
+{% endblock content %}

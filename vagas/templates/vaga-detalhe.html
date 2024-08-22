@@ -6,75 +6,6 @@
 
 {% load static %}
 
-{% block nav %}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const userButton = document.querySelector("#user-button");
-        const userDropdown = document.querySelector("#user-dropdown");
-
-        // Initialize Popper.js
-        const popperInstance = Popper.createPopper(userButton, userDropdown, {
-            placement: 'bottom-end',
-            modifiers: [
-                {
-                    name: 'offset',
-                    options: {
-                        offset: [0, 0],
-                    },
-                },
-            ],
-        });
-
-        // Toggle dropdown visibility
-        userButton.addEventListener("click", function () {
-            userDropdown.classList.toggle("hidden");
-            if (!userDropdown.classList.contains("hidden")) {
-                popperInstance.update();
-            }
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener("click", function (event) {
-            if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
-                userDropdown.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<nav>
-    <a href="{% url 'index' %}">
-        <img src="{% static 'img/logo1.svg' %}" alt="">
-        <img id="img_resp" src="{% static 'img/logo_resp.svg' %}" alt="">
-    </a>
-    {% if user.is_authenticated %}
-    <div id="logged-nav" class="nav-div-button">
-        <a id="notification-button">
-            <i class="bi bi-bell"></i>
-        </a>
-        <div id="user-menu-container" class="nav-button">
-            <a id="user-button" class="nav-button">
-                <i class="bi bi-person-circle"></i>
-                <p>{{ user.username }}</p>
-            </a>
-            <div id="user-dropdown" class="dropdown hidden">
-                <a href="#">Perfil</a>
-                <a href="{% url 'candidaturas' %}">Candidaturas</a>
-                <a href="{% url 'account_logout' %}">Sair</a>
-            </div>
-        </div>
-    </div>
-    {% else %}
-    <div class="nav-div-button">
-        <a class="nav-button" href="">
-            Sou Empresa
-        </a>
-        <a id="entrar" class="nav-button" href="{% url 'account_login' %}">
-            ENTRAR
-        </a>
-    </div>
-    {% endif %}
-</nav>
-{% endblock nav %}
 
 {% block content %}
 <section class="section-vagas">
@@ -95,10 +26,12 @@
                 <p><i class="bi bi-cash-stack"></i> Até R${{ vaga.salario }}</p>
                 <p><i class="bi bi-geo-alt"></i> {{ vaga.local }}</p>
                 <hr>
+                <h3>Sobre a Vaga:</h3>
                 <p>
                     {{vaga.descricao}}
                 </p>
-                <h3>Sobre a Empresa:</h3>
+
+                <!-- <h3>Sobre a Empresa:</h3>
                 <p>Somos uma empresa inovadora no setor de tecnologia, dedicada a oferecer soluções digitais de alta
                     qualidade para nossos clientes. Valorizamos o desenvolvimento profissional contínuo e oferecemos um
                     ambiente de trabalho colaborativo e dinâmico.</p>
@@ -132,17 +65,27 @@
                     <li>Vale refeição ou alimentação.</li>
                     <li>Ambiente de trabalho flexível e remoto.</li>
                     <li>Oportunidades de crescimento e desenvolvimento profissional.</li>
-                </ul>
+                </ul> -->
             </div>
 
-            {% if vaga.is_ativo == True %}
+
+
+            {% if is_candidato %}
             <div id="vaga-candidatar">
-                <a href="">CANDIDATAR-SE</a>
+                <p><strong>VOCÊ JÁ É CANDIDATO</strong></p>
+                <a style="background-color: gray;" href="{% url 'candidaturas' %}">Ver Candidaturas</a>
             </div>
             {% else %}
-            <div id="vaga-candidatar">
-                <p><strong>VAGA ENCERRADA</strong></p>
-            </div>
+                    {% if vaga.is_ativo == True %}
+                    <div id="vaga-candidatar">
+                        <a href="{% url 'candidatura-confirm-page' vaga.id %}">CANDIDATAR-SE</a>
+                    </div>
+                    {% else %}
+                    <div id="vaga-candidatar">
+                        <p><strong>VAGA ENCERRADA</strong></p>
+                        <a style="background-color: gray;" href="{% url 'vaga-list-page' %}">Ver Outras Vagas</a>
+                    </div>
+                    {% endif %}
             {% endif %}
 
         </div>

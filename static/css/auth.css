@@ -117,7 +117,7 @@ footer {
     margin-left: 20px;
 }
 
-.auth-body form input{
+input, select, textarea{
     width: 100%;
     background-color: #a2a2a2;
     border: none;
@@ -162,7 +162,7 @@ form button{
     color: #0E639C;
 }
 
-textarea:focus, input:focus{
+textarea:focus, input:focus, select:focus{
     outline: none;
 }
 

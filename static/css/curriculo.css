@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: 'Montserrat';
+}
+
+body {
+    background-color: #161616;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 75px;
+    background-color: #000000;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+nav > a{
+    margin: 0;
+    text-decoration: none;
+    height: 52px;
+}
+
+nav img {
+    height: 52px;
+}
+
+#img_resp{
+    display: none;
+}
+
+.nav-div-button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-weight: 400;
+    font-size: 15px;
+    justify-content: center;
+    height: 75px;
+    width: 110px;
+    padding: 0;
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.nav-button:hover {
+    color: #c0c0c0;
+}
+
+#vervagas {
+    font-weight: 600;
+    color: #0E639C;
+}
+
+#entrar {
+    font-weight: 600;
+    width: 125px;
+    background-color: #0E639C;
+    margin-right: 0;
+}
+
+#entrar:hover{
+    background-color: white;
+    color: #0E639C;
+}
+
+#logged-nav{
+    justify-content: right;
+    gap: 20px;
+    width: 300px;
+}
+
+#notification-button{
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+#user-button{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+#user-button:hover{
+    color: white;
+}
+
+#user-button i{
+    font-size: 25px;
+}
+
+#user-button p{
+    font-size: 15px;
+    width: 200px;
+}
+
+#nav-hamburguer {
+    display: none;
+    align-items: center;
+    align-content: center;
+    color: #0E639C;
+    text-align: center;
+    font-size: 40px;
+    height: 75px;
+}
+
+#hamburguer-menu {
+    background-color: #000000;
+    display: none;
+    position:absolute;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+#hamburguer-menu a {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#hamburguer-menu #entrar {
+    width: 100%;
+}
+
+section {
+    background-color: #161616;
+    height: 525px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.section-vagas{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+.section-vagas h1{
+    margin-top: 40px;
+    color: white;
+}
+
+.section-show-vagas{
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: space-between;
+    align-items: start;
+    align-content: start;
+    height: fit-content;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+#candidatura-info{
+    padding: 5px;
+    width: 100%;
+}
+
+#user-menu-container {
+    position: relative;
+}
+
+input:focus, select:focus, textarea:focus{
+    outline: none;
+}
+
+input, textarea, select{
+    margin-top: -10px;
+    margin-bottom: 20px;
+    background-color: #c7c7c7;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 500px;
+    min-height: 30px;
+
+    color: #0E639C;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+select{
+    height: 40px;
+    width: 520px;
+}
+
+#textarea{
+    text-align: start;
+    max-width: 500px;
+    height: 200px;
+    resize: none;
+}
+
+.area-vagas{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+#title-desc{
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: -6px;
+}
+
+.candidatura-icons{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: left;
+    gap: 10px;
+}
+
+.vaga{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 25px;
+    gap: 10px;
+}
+
+.vaga-info{
+    width: 70%;
+    color:#161616 ;
+}
+
+.vaga-info h3, .vaga-info p{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.vaga-info p{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    font-size: 13px;
+    gap: 10px;
+}
+
+.vaga-tags p{
+    padding: 5px;
+    margin-bottom: 0;
+    font-weight: 500;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    color: white;
+    background-color: #7D7D7D;
+}
+
+
+.vaga-info i{
+    font-size: 20px;
+}
+
+.vaga img{
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+.section-vagas-info{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: max-content;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+#area-info{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 25px;
+    width: fit-content;
+}
+
+#botao-voltar{
+    text-decoration: none;
+    color: #7D7D7D;
+    font-weight: 700;
+}
+
+hr{
+    border-width: 0.1px;
+    border-color: rgb(232, 232, 232);
+    border-style: solid;
+}
+
+#vaga-desc{
+    margin-top: -90px;
+    margin: 30px;
+    width: fit-content;
+}
+
+#vaga-candidatar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: 30px;
+}
+
+#vaga-candidatar button{
+    background-color: #0E639C;
+    border: none;
+    color: white;
+    text-decoration: none;
+    padding: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+footer{
+    background-color: #0E639C;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    padding-left: 80px;
+    padding-right: 80px;
+    height: 150px;
+}
+
+footer h3{
+    font-weight: 300;
+    font-size: 16px;
+}
+
+footer img {
+    height: 60px;
+}
+
+footer div{
+    width: 158.34px;
+}
+
+@media screen and (max-width: 450px) {
+
+    section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    nav {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .vaga {
+        flex-direction: column;
+    }
+    
+    #vagas-notification i{
+        display: none;
+    }
+
+    #vagas-notification{
+        flex-direction: column;
+    }
+
+    nav > a > img{
+        display: none;
+    }
+
+    #img_resp{
+        display: block;
+    }
+
+    .nav-button {
+        margin-right: 0;
+    }
+
+    .candidatura-actions a{
+        font-size: 12px;
+    }
+
+    #candidatura-details{
+        font-size: 14px;
+    }
+
+    .candidatura-actions{
+        align-content: center;
+        flex-direction: column-reverse;
+    }
+}
+
+@media screen and (max-width: 728px) {
+
+    .section-show-vagas{
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+    }
+
+    .vagas-filtros{
+        width: 100%;
+    }
+
+    .area-vagas {
+        width: 100%;
+    }
+
+    #botao-resp-filtros{
+        display: flex;
+    }
+
+    #vagas-notification i{
+        font-size: 50px;
+    }
+
+}
+
+@media screen and (max-width: 940px) {
+
+    section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    nav {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    footer {
+        padding-left: 40px;
+        padding-right: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+
+    footer div{
+        display: none;
+    }
+
+    #nav-hamburguer {
+        display: block;
+    }
+
+    .nav-button{
+        width: max-content;
+    }
+
+    #user-button{
+        gap: 5px;
+    }
+
+    #user-button p{
+        display: none;
+    }
+}

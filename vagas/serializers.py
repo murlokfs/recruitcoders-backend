@@ -10,11 +10,13 @@ class VagaSerializer(serializers.ModelSerializer):
             "salario",
             "descricao",
             "local",
+            "experiencia",
+            "contrato",
             "valido_ate",
             "criado_em",
             "atualizado_em",
+            "qntd_etapas",
             "is_ativo",
-            "candidaturas",
         ]
 
 class EmpresaSerializer(serializers.ModelSerializer):
@@ -22,5 +24,8 @@ class EmpresaSerializer(serializers.ModelSerializer):
         model = Empresa
         fields = [
             "nome",
+            "imagem",
             "email",
+            "colaboradores",
+            "tipo"
         ]

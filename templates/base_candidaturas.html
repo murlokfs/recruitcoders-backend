@@ -17,9 +17,62 @@
 <body>
 
     
-    {% block nav %}
-        
-    {% endblock nav %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userButton = document.querySelector("#user-button");
+            const userDropdown = document.querySelector("#user-dropdown");
+    
+            // Initialize Popper.js
+            const popperInstance = Popper.createPopper(userButton, userDropdown, {
+                placement: 'bottom-end',
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 0],
+                        },
+                    },
+                ],
+            });
+    
+            // Toggle dropdown visibility
+            userButton.addEventListener("click", function () {
+                userDropdown.classList.toggle("hidden");
+                if (!userDropdown.classList.contains("hidden")) {
+                    popperInstance.update();
+                }
+            });
+    
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (event) {
+                if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
+                    userDropdown.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+    <nav>
+        <a href="{% url 'vaga-list-page' %}">
+            <img src="{% static 'img/logo1.svg' %}" alt="">
+            <img id="img_resp" src="{% static 'img/logo_resp.svg' %}" alt="">
+        </a>
+        <div id="logged-nav" class="nav-div-button">
+            <a id="notification-button">
+                <i class="bi bi-bell"></i>
+            </a>
+            <div id="user-menu-container" class="nav-button">
+                <a id="user-button" class="nav-button">
+                    <i class="bi bi-person-circle"></i>
+                    <p>{{ request.user }}</p>
+                </a>
+                <div id="user-dropdown" class="dropdown hidden" role="menu">
+                    <a href="{% url 'curriculo' %}">Curriculo</a>
+                    <a href="{% url 'candidaturas' %}">Candidaturas</a>
+                    <a href="{% url 'account_logout' %}">Sair</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     
     {% block content %}

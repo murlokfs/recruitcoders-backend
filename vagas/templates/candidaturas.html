@@ -1,70 +1,94 @@
 {% include 'base_candidaturas.html' %}
 
 {% load static %}
-
-
-{% block nav %}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const userButton = document.querySelector("#user-button");
-        const userDropdown = document.querySelector("#user-dropdown");
-
-        // Initialize Popper.js
-        const popperInstance = Popper.createPopper(userButton, userDropdown, {
-            placement: 'bottom-end',
-            modifiers: [
-                {
-                    name: 'offset',
-                    options: {
-                        offset: [0, 0],
-                    },
-                },
-            ],
-        });
-
-        // Toggle dropdown visibility
-        userButton.addEventListener("click", function () {
-            userDropdown.classList.toggle("hidden");
-            if (!userDropdown.classList.contains("hidden")) {
-                popperInstance.update();
-            }
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener("click", function (event) {
-            if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
-                userDropdown.classList.add("hidden");
-            }
-        });
-    });
-</script>
-<nav>
-    <a href="{% url 'index' %}">
-        <img src="{% static 'img/logo1.svg' %}" alt="">
-        <img id="img_resp" src="{% static 'img/logo_resp.svg' %}" alt="">
-    </a>
-    <div id="logged-nav" class="nav-div-button">
-        <a id="notification-button">
-            <i class="bi bi-bell"></i>
-        </a>
-        <div id="user-menu-container" class="nav-button">
-            <a id="user-button" class="nav-button">
-                <i class="bi bi-person-circle"></i>
-                <p>{{request.user}}</p>
-            </a>
-            <div id="user-dropdown" class="dropdown hidden">
-                <a href="#">Perfil</a>
-                <a href="{% url 'candidaturas' %}">Candidaturas</a>
-                <a href="{% url 'account_logout' %}">Sair</a>
-            </div>
-        </div>
-    </div>
-</nav>
-{% endblock nav %}
     
 
 {% block content %}
+<style>
+.messages {
+    width: 400px;
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 25px; /* Borda arredondada */
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    list-style-type: none; /* Remove o ponto do li */
+    text-decoration: none; /* Remove a decoração de texto */
+}
+
+/* Estilos específicos para alerta de aviso */
+.alert-warning {
+    background-color: #fff3cd;
+    padding: 15px;
+    text-decoration: none;
+    color: #856404;
+    border: none;
+    border-radius: 20px; /* Borda arredondada específica */
+}
+
+.alert-warning {
+    background-color: #cdffda;
+    padding: 15px;
+    text-decoration: none;
+    color: #318504;
+    border: none;
+    border-radius: 20px; /* Borda arredondada específica */
+}
+
+/* Estilos específicos para alerta de informação */
+.alert-info {
+    background-color: #cce5ff;
+    padding: 15px;
+    text-decoration: none;
+    color: #004085;
+    border: none;
+    border-radius: 20px; /* Borda arredondada específica */
+}
+
+.alert ul {
+    padding-left: 0; /* Remove o recuo padrão */
+    list-style-type: none; /* Remove os pontos da lista */
+}
+
+.errorlist {
+    margin-top: 5px;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.errorlist p {
+    color: #721c24;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 425px) {
+    .messages {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .alert {
+        border-radius: 0;
+    }
+}
+</style>
+
 <section class="section-vagas">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="alert-{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <h1>Suas candidaturas</h1>
     <h3 id="title-desc">Acompanhe o andamento de suas candidaturas.</h3>
 
@@ -168,43 +192,59 @@
         </form>
 
         
+        {% if candidaturas %}
+                
+                    
         {% for candidatura in candidaturas %}
-            
-        <div class="area-vagas">
-            
-            <div class="vaga">
-                <div id="candidatura-info" class="vaga-info">
-                    <h3>{{candidatura.vaga.titulo}}</h3>
-                    <div class="candidatura-icons">
-                        <p><i class="bi bi-briefcase"></i> {{candidatura.vaga.empresa}}</p>
-                        <p><i class="bi bi-geo-alt"></i> {{candidatura.vaga.local}}</p>
-                    </div>
-                    <div class="candidatura-progress-area">
-                        <div class="progress-desc">
-                            <p>Progresso</p>
-                            <p>{{candidatura.etapa}}/{{candidatura.vaga.qntd_etapas}} Etapa(s)</p>
+
+            <div class="area-vagas">
+                
+                <div class="vaga">
+                    <div id="candidatura-info" class="vaga-info">
+                        <h3>{{candidatura.vaga.titulo}}</h3>
+                        <div class="candidatura-icons">
+                            <p><i class="bi bi-briefcase"></i> {{candidatura.vaga.empresa}}</p>
+                            <p><i class="bi bi-geo-alt"></i> {{candidatura.vaga.local}}</p>
                         </div>
-                        <div class="progress-out">
-                            <div style="width: {{candidatura.progresso}}%;" class="progress-in">
+                        <div class="candidatura-progress-area">
+                            <div class="progress-desc">
+                                <p>Progresso</p>
+                                <p>{{candidatura.etapa}}/{{candidatura.vaga.qntd_etapas}} Etapa(s)</p>
+                            </div>
+                            <div class="progress-out">
+                                <div style="width: {{candidatura.progresso}}%;" class="progress-in">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    {% if candidatura.is_ativa == True %}
                         
+                        {% if candidatura.is_ativa == True %}
+                            
+                            
+                        <div class="candidatura-actions">
+                            <a href="{% url 'candidatura-delete-page' candidatura.id %}">Desistir da Vaga</a>
+                            <a id="candidatura-details" href="">Ver Andamento</a>
+                        </div>
                         
-                    <div class="candidatura-actions">
-                        <a href="">Desistir da Vaga</a>
-                        <a id="candidatura-details" href="">Ver Andamento</a>
+                        {% endif %}
                     </div>
+                </a>
+            </div>
+            
+
+        {% endfor %}
+
+        {% else %}
+            
+        <div class="area-vagas">
+                
+            <div class="vaga">
+                <div id="candidatura-info" class="vaga-info">
                     
-                    {% endif %}
                 </div>
             </a>
-        </div>
+        </div>    
 
-        
-        {% endfor %}
+        {% endif %}
             
     </section>
 </section>

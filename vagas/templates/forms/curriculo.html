@@ -1,0 +1,140 @@
+{% extends 'base_curriculo.html' %}
+
+{% load static %}
+
+{% block title %}
+Currículo - Recruit Coders
+{% endblock title %}
+    
+
+{% block content %}
+<style>
+    .messages {
+        width: 400px;
+        margin-bottom: 20px;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 25px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        list-style-type: none;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: none;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: none;
+    }
+
+    .alert-info {
+        background-color: #cce5ff;
+        color: #004085;
+        border: none;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: none;
+    }
+
+    .alert ul {
+        padding-left: 0;
+        list-style-type: none;
+    }
+
+    .errorlist {
+        margin-top: 5px;
+        background-color: #f8d7da;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .errorlist p {
+        color: #721c24;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    @media screen and (max-width: 425px) {
+        .messages {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .alert {
+            border-radius: 0;
+        }
+    }
+</style>
+    
+
+<section class="section-vagas">
+    <section class="section-vagas-info">
+        <div id="area-info">
+            <div id="vaga-desc">
+                <a id="botao-voltar" href="javascript:history.back()"><i class="bi bi-caret-left-fill"></i> Voltar</a>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <h2><i class="bi bi-ui-checks"></i> Seu Currículo</h2>
+
+                    <hr>
+                    <h3>Nome Completo:</h3>
+                    {{ form.nome_completo }}
+                    {% if form.nome_completo.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.nome_completo.errors %}
+                        <p><i class="bi bi-exclamation-diamond-fill"></i> {{ error }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <h3>Sobre Mim:</h3>
+                    {{ form.sobre_mim }}
+                    {% if form.sobre_mim.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.sobre_mim.errors %}
+                        <p><i class="bi bi-exclamation-diamond-fill"></i> {{ error }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <h3>Formação Acadêmica:</h3>
+                    {{ form.formacao }}
+                    {% if form.formacao.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.formacao.errors %}
+                        <p><i class="bi bi-exclamation-diamond-fill"></i> {{ error }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <h3>Habilidades:</h3>
+                    {{ form.habilidades }}
+                    {% if form.habilidades.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.habilidades.errors %}
+                        <p><i class="bi bi-exclamation-diamond-fill"></i> {{ error }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <div id="vaga-candidatar">
+                        <button type="submit">Concluído</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock content %}

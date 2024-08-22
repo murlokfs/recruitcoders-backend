@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 class VagaListCreateView(generics.ListCreateAPIView):
     queryset = Vaga.objects.all().order_by("atualizado_em")
     serializer_class = VagaSerializer
-    permission_classes = [IsAuthenticated]  # Permissão aplicada
+    permission_classes = [IsAuthenticated]
 
 class VagaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vaga.objects.all()
