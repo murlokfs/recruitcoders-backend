@@ -1,0 +1,30 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+<section class="dashboard-section">
+    <h2>Candidaturas para a Vaga: {{ object.vaga.titulo }}</h2>
+    <p>Atualizado em: {{now}}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Candidato</th>
+                <th>Etapa</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidatura in candidaturas %}
+            <tr>
+                <td>{{ candidatura.candidato.username }}</td>
+                <td>{{ candidatura.etapa }} / {{ candidatura.vaga.qntd_etapas }}</td>
+                <td>{{ candidatura.is_ativa|yesno:"Ativa,Encerrada" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhuma candidatura encontrada para esta vaga.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

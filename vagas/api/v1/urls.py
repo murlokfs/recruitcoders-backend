@@ -3,7 +3,9 @@ from .views import (
     VagaListCreateView, 
     VagaRetrieveUpdateDestroyView, 
     EmpresaListCreateView, 
-    EmpresaRetrieveUpdateDestroyView
+    EmpresaRetrieveUpdateDestroyView,
+    CandidaturaListCreateView, 
+    CandidaturaRetrieveUpdateDestroyView,
 )
 
 urlpatterns = [
@@ -12,5 +14,8 @@ urlpatterns = [
 
     path('empresas/', EmpresaListCreateView.as_view(), name='empresa-list-create'),
     path('empresas/<int:pk>/', EmpresaRetrieveUpdateDestroyView.as_view(), name='empresa-detail'),
+
+    path('candidaturas/', CandidaturaListCreateView.as_view(), name='empresa-list-create'),
+    path('candidaturas/<int:pk>/', CandidaturaRetrieveUpdateDestroyView.as_view(), name='empresa-detail'),
 ]
 

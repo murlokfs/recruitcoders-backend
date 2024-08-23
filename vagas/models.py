@@ -34,7 +34,7 @@ class Empresa(models.Model):
 
     nome = models.CharField(max_length=50)
     imagem = models.ImageField(upload_to="empresas", blank=True)
-    colaboradores = models.ManyToManyField(User)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField()
     tipo = models.CharField(
         max_length=20, choices=TIPOEMPRESA, default=TIPOEMPRESA[0:0]

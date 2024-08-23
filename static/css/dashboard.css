@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: 'Montserrat';
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0E639C;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+nav img {
+    height: 40px;
+}
+
+#logged-nav {
+    display: flex;
+    align-items: center;
+}
+
+#user-menu-container {
+    position: relative;
+}
+
+#user-dropdown {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#user-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+#user-dropdown a:hover {
+    background-color: #bdc3c7;
+}
+
+.hidden {
+    display: none;
+}
+
+.section-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
+
+#sidebar {
+    width: 250px;
+    background-color: #093451;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin-bottom: 20px;
+}
+
+#sidebar ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+#sidebar ul li a:hover {
+    color: #3498db;
+}
+
+#logout-button {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+#logout-button:hover {
+    color: #e74c3c;
+}
+
+#dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+    min-width: 300px;
+}
+
+#dashboard-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.dashboard-overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dashboard-overview .card {
+    flex: 1 1 250px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-overview .card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dashboard-overview .card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.dashboard-section {
+    margin-top: 20px;
+}
+
+.dashboard-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.dashboard-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-section table thead {
+    background-color: #0E639C;
+    color: #ecf0f1;
+}
+
+.dashboard-section table thead th {
+    padding: 10px;
+    text-align: left;
+}
+
+.dashboard-section table tbody tr:nth-child(odd) {
+    background-color: #f4f4f4;
+}
+
+.dashboard-section table tbody td {
+    padding: 10px;
+}
+
+.dashboard-section table tbody td a {
+    color: #3498db;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.dashboard-section table tbody td a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0E639C;
+    color: #ecf0f1;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+footer img {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .dashboard-overview .card {
+        margin: 10px 0;
+    }
+}

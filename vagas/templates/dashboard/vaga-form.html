@@ -1,0 +1,115 @@
+{% extends 'base_dashboard.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h2>{% if object %}Editar Vaga{% else %}Criar Nova Vaga{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Título da Vaga -->
+        <div class="form-group">
+            <label for="id_titulo">Título</label>
+            {{ form.titulo }}
+        </div>
+        
+        <!-- Descrição da Vaga -->
+        <div class="form-group">
+            <label for="id_descricao">Descrição</label>
+            {{ form.descricao }}
+        </div>
+        
+        <!-- Salário -->
+        <div class="form-group">
+            <label for="id_salario">Salário</label>
+            {{ form.salario }}
+        </div>
+        
+        <!-- Nível de Experiência -->
+        <div class="form-group">
+            <label for="id_experiencia">Nível de Experiência</label>
+            {{ form.experiencia }}
+        </div>
+        
+        <!-- Tipo de Contrato -->
+        <div class="form-group">
+            <label for="id_contrato">Tipo de Contrato</label>
+            {{ form.contrato }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_stack">Stack</label>
+            {{ form.stack }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_local">Local</label>
+            {{ form.local }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_qntd_etapas">Quantidade de Etapas</label>
+            {{ form.qntd_etapas }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_valido_ate">Validade</label>
+            <input 
+                type="text" 
+                name="valido_ate" 
+                id="id_valido_ate" 
+                value="{{ form.valido_ate.value|date:'d/m/Y' }}">
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">{% if object %}Atualizar{% else %}Criar{% endif %}</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,4 +1,4 @@
-from .models import Vaga, Empresa
+from .models import Vaga, Empresa, Candidatura
 from rest_framework import serializers
 
 class VagaSerializer(serializers.ModelSerializer):
@@ -28,4 +28,14 @@ class EmpresaSerializer(serializers.ModelSerializer):
             "email",
             "colaboradores",
             "tipo"
+        ]
+
+class CandidaturaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Candidatura
+        fields = [
+            "vaga",
+            "candidato",
+            "etapa",
+            "is_ativa"
         ]

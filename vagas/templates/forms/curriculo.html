@@ -83,7 +83,7 @@ Currículo - Recruit Coders
     <section class="section-vagas-info">
         <div id="area-info">
             <div id="vaga-desc">
-                <a id="botao-voltar" href="javascript:history.back()"><i class="bi bi-caret-left-fill"></i> Voltar</a>
+                <a id="botao-voltar" href="{% url 'vaga-list-page' %}"><i class="bi bi-caret-left-fill"></i> Voltar</a>
                 <form action="" method="POST">
                     {% csrf_token %}
                     <h2><i class="bi bi-ui-checks"></i> Seu Currículo</h2>

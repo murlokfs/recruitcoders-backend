@@ -1,0 +1,69 @@
+{% extends 'base_dashboard.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<h1>{{request.user.empresa}} | Dashboard</h1>
+<div class="dashboard-overview">
+    <div class="card">
+        <h2>Total de Vagas</h2>
+        <p>{{ total_vagas }}</p>
+    </div>
+    <div class="card">
+        <h2>Candidaturas Recebidas</h2>
+        <p>{{ total_candidaturas }}</p>
+    </div>
+    <div class="card">
+        <h2>Vagas Ativas</h2>
+        <p>{{ vagas_ativas }}</p>
+    </div>
+    <div class="card">
+        <h2>Vagas Encerradas</h2>
+        <p>{{ vagas_encerradas }}</p>
+    </div>
+</div>
+
+<div class="dashboard-section">
+    <h2>Minhas Vagas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Data de Publicação</th>
+                <th>Vencimento</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for vaga in vagas %}
+                
+            <tr>
+                <td><a href="{% url 'dashboard-vaga-view' vaga.id %}">{{vaga.titulo}}</a></td>
+                <td>{{vaga.criado_em}}</td>
+                <td>{{vaga.valido_ate}}</td>
+                <td>
+                    
+                    {% if vaga.is_ativo %}
+                        Ativo
+                    {% else %}
+                        Encerrado
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'dashboard-vaga-editar' vaga.id %}"><i class="bi bi-pencil"></i> Editar</a>
+                    <a href="{% url 'dashboard-vaga-deletar' vaga.id %}"><i class="bi bi-trash"></i> Excluir</a>
+                </td>
+            </tr>
+            
+            {% endfor %}
+
+            
+            <!-- Outras vagas podem ser listadas aqui -->
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+    

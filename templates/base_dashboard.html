@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Recruit Coders</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'index' %}">
+            <img src="{% static 'img/logo2.svg' %}" alt="Logo">
+        </a>
+        <div id="logged-nav" class="nav-div-button">
+            <!-- Removed user info and notification icon -->
+        </div>
+    </nav>
+
+    <section class="section-dashboard">
+        <aside id="sidebar">
+            <ul>
+                <li><a href="{% url 'dashboard' %}"><i class="bi bi-house-door"></i> Dashboard</a></li>
+                <li><a href="{% url 'dashboard-vaga-criar' %}"><i class="bi bi-briefcase"></i> Criar Vaga</a></li>
+                <li><a href="{% url 'account_logout' %}"><i class="bi bi-door-open"></i> Sair</a></li>
+            </ul>
+
+        </aside>
+
+        <main id="dashboard-content">
+            
+            {% block content %}
+                
+            {% endblock content %}
+        </main>
+        
+        
+    </section>
+
+    <footer>
+        <img src="{% static 'img/logo2.svg' %}" alt="Logo">
+        <p>CodersRecruit © 2024</p>
+    </footer>
+
+    <script>
+        // Sidebar toggle for mobile view
+        document.getElementById('user-button').addEventListener('click', function () {
+            const userDropdown = document.getElementById('user-dropdown');
+            userDropdown.classList.toggle('hidden');
+            Popper.createPopper(document.getElementById('user-button'), userDropdown, {
+                placement: 'bottom-end',
+            });
+        });
+    </script>
+</body>
+
+</html>

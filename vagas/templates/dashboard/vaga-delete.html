@@ -1,0 +1,66 @@
+{% extends 'base_dashboard.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .delete-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .delete-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .delete-container p {
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        margin-right: 10px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
+
+<div class="delete-container">
+    <h2>Confirmar Exclusão</h2>
+    <p>Tem certeza que deseja excluir a vaga "{{ vaga.titulo }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock content %}
+    
