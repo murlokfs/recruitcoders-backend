@@ -25,6 +25,7 @@ class Curriculo(models.Model):
     def __str__(self):
         return self.usuario.username
 
+
 class Empresa(models.Model):
     TIPOEMPRESA = (
         ("startup", "StartUp"),
