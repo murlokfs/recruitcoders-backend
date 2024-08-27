@@ -1,9 +1,11 @@
-from rest_framework import generics, permissions
-from rest_framework.response import Response
 from django.contrib.auth.models import Group
-from vagas.models import Vaga, Empresa, Candidatura
-from vagas.serializers import VagaSerializer, EmpresaSerializer, CandidaturaSerializer
+from rest_framework import generics, permissions
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+
+from vagas.models import Candidatura, Empresa, Vaga
+from vagas.serializers import (CandidaturaSerializer, EmpresaSerializer,
+                               VagaSerializer)
 
 # ============ API V1 ============
 
@@ -38,7 +40,9 @@ class CandidaturaListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAdminUser]
 
 
-class CandidaturaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class CandidaturaRetrieveUpdateDestroyView(
+    generics.RetrieveUpdateDestroyAPIView
+):
     queryset = Candidatura.objects.all()
     serializer_class = CandidaturaSerializer
     permission_classes = [IsAdminUser]

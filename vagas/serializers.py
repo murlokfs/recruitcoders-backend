@@ -1,5 +1,6 @@
-from .models import Vaga, Empresa, Candidatura
 from rest_framework import serializers
+
+from .models import Candidatura, Empresa, Vaga
 
 
 class VagaSerializer(serializers.ModelSerializer):

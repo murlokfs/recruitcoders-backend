@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Vaga, Empresa, Local, Candidatura, Curriculo
+
+from .models import Candidatura, Curriculo, Empresa, Local, Vaga
 
 
 @admin.register(Vaga)

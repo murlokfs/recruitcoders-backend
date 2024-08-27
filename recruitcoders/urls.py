@@ -1,23 +1,15 @@
+from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from vagas.views import (
-    Index,
-    VagaListView,
-    VagaDetailView,
-    CandidaturaListView,
-    CurriculoCreateView,
-    CurriculoUpdateView,
-    CandidaturaCreateView,
-    CandidaturaDeleteView,
-    DashboardListView,
-    DashboardCreateView,
-    DashboardUpdateView,
-    DashboardDeleteView,
-    DashboardCandidaturasListView,
-)
-from debug_toolbar.toolbar import debug_toolbar_urls
+from django.urls import include, path
+
+from vagas.views import (CandidaturaCreateView, CandidaturaDeleteView,
+                         CandidaturaListView, CurriculoCreateView,
+                         CurriculoUpdateView, DashboardCandidaturasListView,
+                         DashboardCreateView, DashboardDeleteView,
+                         DashboardListView, DashboardUpdateView, Index,
+                         VagaDetailView, VagaListView)
 
 urlpatterns = [
     path("", Index.as_view(), name="index"),

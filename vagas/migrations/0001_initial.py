@@ -85,7 +85,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("nome", models.CharField(max_length=50)),
-                ("imagem", models.ImageField(blank=True, upload_to="empresas")),
+                (
+                    "imagem",
+                    models.ImageField(blank=True, upload_to="empresas"),
+                ),
                 ("email", models.EmailField(max_length=254)),
                 (
                     "tipo",
@@ -121,7 +124,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("titulo", models.CharField(max_length=30)),
-                ("salario", models.DecimalField(decimal_places=2, max_digits=6)),
+                (
+                    "salario",
+                    models.DecimalField(decimal_places=2, max_digits=6),
+                ),
                 ("descricao", models.TextField()),
                 (
                     "experiencia",
@@ -152,7 +158,11 @@ class Migration(migrations.Migration):
                 (
                     "contrato",
                     models.CharField(
-                        choices=[("clt", "CLT"), ("pj", "PJ"), ("estagio", "Estágio")],
+                        choices=[
+                            ("clt", "CLT"),
+                            ("pj", "PJ"),
+                            ("estagio", "Estágio"),
+                        ],
                         default=(),
                         max_length=7,
                     ),
@@ -165,7 +175,8 @@ class Migration(migrations.Migration):
                 (
                     "empresa",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="vagas.empresa"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="vagas.empresa",
                     ),
                 ),
                 (
@@ -202,7 +213,8 @@ class Migration(migrations.Migration):
                 (
                     "vaga",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="vagas.vaga"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="vagas.vaga",
                     ),
                 ),
             ],

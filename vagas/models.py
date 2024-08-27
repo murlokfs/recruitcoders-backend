@@ -1,6 +1,7 @@
 from typing import Iterable
-from django.db import models
+
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Curriculo(models.Model):
@@ -79,9 +80,15 @@ class Vaga(models.Model):
     descricao = models.TextField()
 
     local = models.ForeignKey(Local, on_delete=models.CASCADE, blank=True)
-    experiencia = models.CharField(max_length=6, choices=NIVEIS, default=NIVEIS[0:0])
-    stack = models.CharField(max_length=10, choices=STACKS, default=STACKS[0:0])
-    contrato = models.CharField(max_length=7, choices=CONTRATOS, default=CONTRATOS[0:0])
+    experiencia = models.CharField(
+        max_length=6, choices=NIVEIS, default=NIVEIS[0:0]
+    )
+    stack = models.CharField(
+        max_length=10, choices=STACKS, default=STACKS[0:0]
+    )
+    contrato = models.CharField(
+        max_length=7, choices=CONTRATOS, default=CONTRATOS[0:0]
+    )
 
     valido_ate = models.DateTimeField()
     criado_em = models.DateTimeField(auto_now_add=True)

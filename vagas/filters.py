@@ -1,5 +1,6 @@
 import django_filters
-from .models import Vaga, Candidatura
+
+from .models import Candidatura, Vaga
 
 
 class VagaFilter(django_filters.FilterSet):

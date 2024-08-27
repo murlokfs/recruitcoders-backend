@@ -1,10 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.response import Response
-from vagas.models import Vaga, Empresa, Candidatura
-from vagas.serializers import VagaSerializer, EmpresaSerializer, CandidaturaSerializer
-from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+
+from vagas.models import Candidatura, Empresa, Vaga
+from vagas.serializers import (CandidaturaSerializer, EmpresaSerializer,
+                               VagaSerializer)
 
 # ============ API V2 ============
 

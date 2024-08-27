@@ -1,16 +1,11 @@
 from datetime import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.cache import cache
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    TemplateView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  TemplateView, UpdateView)
 from django_filters.views import FilterView
 
 from .filters import CandidaturaFilter, VagaFilter
@@ -149,7 +144,9 @@ class CandidaturaListView(LoginRequiredMixin, FilterView):
         for candidatura in context["candidaturas"]:
             progresso = 0
             if candidatura.vaga.qntd_etapas > 0:
-                progresso = (candidatura.etapa / candidatura.vaga.qntd_etapas) * 100
+                progresso = (
+                    candidatura.etapa / candidatura.vaga.qntd_etapas
+                ) * 100
                 progresso = int(progresso)
             candidatura.progresso = progresso
         return context
@@ -207,9 +204,15 @@ class DashboardListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         empresa = self.request.user.empresa
 
         total_vagas = Vaga.objects.filter(empresa=empresa).count()
-        total_candidaturas = Candidatura.objects.filter(vaga__empresa=empresa).count()
-        vagas_ativas = Vaga.objects.filter(empresa=empresa, is_ativo=True).count()
-        vagas_encerradas = Vaga.objects.filter(empresa=empresa, is_ativo=False).count()
+        total_candidaturas = Candidatura.objects.filter(
+            vaga__empresa=empresa
+        ).count()
+        vagas_ativas = Vaga.objects.filter(
+            empresa=empresa, is_ativo=True
+        ).count()
+        vagas_encerradas = Vaga.objects.filter(
+            empresa=empresa, is_ativo=False
+        ).count()
 
         context["total_vagas"] = total_vagas
         context["total_candidaturas"] = total_candidaturas
@@ -259,7 +262,9 @@ class DashboardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user.groups.filter(name="Empresa").exists()
 
 
-class DashboardCandidaturasListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class DashboardCandidaturasListView(
+    LoginRequiredMixin, UserPassesTestMixin, ListView
+):
     model = Candidatura
     template_name = "dashboard/vaga-view.html"
     context_object_name = "candidaturas"

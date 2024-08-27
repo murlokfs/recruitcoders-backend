@@ -1,5 +1,6 @@
-from .views import VagaViewSet, EmpresaViewSet, CandidaturaViewSet
 from rest_framework.routers import DefaultRouter
+
+from .views import CandidaturaViewSet, EmpresaViewSet, VagaViewSet
 
 router = DefaultRouter()
 router.register(r"vagas", VagaViewSet)
