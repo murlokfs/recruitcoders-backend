@@ -16,12 +16,12 @@
 
 <body>
 
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const userButton = document.querySelector("#user-button");
             const userDropdown = document.querySelector("#user-dropdown");
-    
+
             // Initialize Popper.js
             const popperInstance = Popper.createPopper(userButton, userDropdown, {
                 placement: 'bottom-end',
@@ -34,7 +34,7 @@
                     },
                 ],
             });
-    
+
             // Toggle dropdown visibility
             userButton.addEventListener("click", function () {
                 userDropdown.classList.toggle("hidden");
@@ -42,7 +42,7 @@
                     popperInstance.update();
                 }
             });
-    
+
             // Close dropdown when clicking outside
             document.addEventListener("click", function (event) {
                 if (!userButton.contains(event.target) && !userDropdown.contains(event.target)) {
@@ -74,14 +74,14 @@
         </div>
     </nav>
 
-    
+
     {% block content %}
-        
+
 
     {% endblock content %}
-    
+
     {% block footer %}
-        
+
 
 
     {% endblock footer %}

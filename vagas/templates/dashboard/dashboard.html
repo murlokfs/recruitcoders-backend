@@ -37,15 +37,15 @@
             </tr>
         </thead>
         <tbody>
-            
+
             {% for vaga in vagas %}
-                
+
             <tr>
                 <td><a href="{% url 'dashboard-vaga-view' vaga.id %}">{{vaga.titulo}}</a></td>
                 <td>{{vaga.criado_em}}</td>
                 <td>{{vaga.valido_ate}}</td>
                 <td>
-                    
+
                     {% if vaga.is_ativo %}
                         Ativo
                     {% else %}
@@ -57,13 +57,12 @@
                     <a href="{% url 'dashboard-vaga-deletar' vaga.id %}"><i class="bi bi-trash"></i> Excluir</a>
                 </td>
             </tr>
-            
+
             {% endfor %}
 
-            
+
             <!-- Outras vagas podem ser listadas aqui -->
         </tbody>
     </table>
 </div>
 {% endblock content %}
-    

@@ -39,7 +39,7 @@
                 <i class="bi bi-filter"></i>
                 <p>Filtrar</p>
             </div>
-                
+
             <div class="filter-section">
                 <h3>Tipo de Contrato</h3>
                 <div class="filter-select" id="contrato">
@@ -101,7 +101,7 @@
             <div class="filter-section">
                 <h3>Habilidades</h3>
                 <div class="filter-select" id="stack">
-                    
+
                     {% for stack in stacks %}
                     <label>
                         <input type="checkbox" name="stack" value="{{stack.0}}"
@@ -112,7 +112,7 @@
                         {{stack.1}}
                     </label>
                     {% endfor %}
-                        
+
                 </div>
             </div>
             <div class="filter-section">
@@ -155,14 +155,14 @@
                 {% else %}
                     <span class="page-link disabled">‹ Primeiro</span>
                 {% endif %}
-            
+
                 <!-- Página Anterior -->
                 {% if page_obj.has_previous %}
                     <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">‹ Anterior</a>
                 {% else %}
                     <span class="page-link disabled">‹ Anterior</span>
                 {% endif %}
-            
+
                 <!-- Páginas Numéricas -->
                 {% for num in page_obj.paginator.page_range %}
                     {% if num == page_obj.number %}
@@ -171,14 +171,14 @@
                         <a href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">{{ num }}</a>
                     {% endif %}
                 {% endfor %}
-            
+
                 <!-- Página Seguinte -->
                 {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Próximo ›</a>
                 {% else %}
                     <span class="page-link disabled">Próximo ›</span>
                 {% endif %}
-            
+
                 <!-- Última Página -->
                 {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="page-link">Último ›</a>

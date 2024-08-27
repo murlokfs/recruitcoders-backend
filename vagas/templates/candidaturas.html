@@ -1,7 +1,7 @@
 {% include 'base_candidaturas.html' %}
 
 {% load static %}
-    
+
 
 {% block content %}
 
@@ -21,7 +21,7 @@
                 <i class="bi bi-filter"></i>
                 <p>Filtrar</p>
             </div>
-                
+
             <div class="filter-section">
                 <h3>Tipo de Contrato</h3>
                 <div class="filter-select" id="contrato">
@@ -83,7 +83,7 @@
             <div class="filter-section">
                 <h3>Habilidades</h3>
                 <div class="filter-select" id="stack">
-                    
+
                     {% for stack in stacks %}
                     <label>
                         <input type="checkbox" name="stack" value="{{stack.0}}"
@@ -94,7 +94,7 @@
                         {{stack.1}}
                     </label>
                     {% endfor %}
-                        
+
                 </div>
             </div>
             <div class="filter-section">
@@ -108,14 +108,14 @@
             </button>
         </form>
 
-        
+
         {% if candidaturas %}
-                
-                    
+
+
         {% for candidatura in candidaturas %}
 
             <div class="area-vagas">
-                
+
                 <div class="vaga">
                     <div id="candidatura-info" class="vaga-info">
                         <h3>{{candidatura.vaga.titulo}}</h3>
@@ -133,18 +133,18 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         {% if candidatura.is_ativa == True %}
-                            
-                            
+
+
                         <div class="candidatura-actions">
                             <a href="{% url 'candidatura-delete-page' candidatura.id %}">Desistir da Vaga</a>
                             <a id="candidatura-details" href="">Ver Andamento</a>
                         </div>
-                        
-                        
+
+
                         {% else %}
-                            
+
                         <div class="candidatura-actions">
                             <a href="{% url 'candidatura-delete-page' candidatura.id %}">Deletar Candidatura</a>
                             <p style="font-weight: 800; margin-top: 10px; font-size: 16px;">Candidatura Encerrada.</p>
@@ -154,24 +154,24 @@
                     </div>
                 </a>
             </div>
-            
+
 
         {% endfor %}
 
         {% else %}
-            
+
         <div class="area-vagas">
-                
+
             <div class="vaga">
                 <div id="candidatura-info" class="vaga-info">
                     <h3>Não há candidaturas.</h3>
                     <a href="{% url 'vaga-list-page' %}">Ver Vagas</a>
                 </div>
             </a>
-        </div>    
+        </div>
 
         {% endif %}
-            
+
     </section>
 </section>
 
@@ -184,4 +184,3 @@
     <div></div>
 </footer>
 {% endblock footer %}
-    
