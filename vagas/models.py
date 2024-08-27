@@ -108,4 +108,7 @@ class Candidatura(models.Model):
     is_ativa = models.BooleanField()
 
     def __str__(self):
-        return f"{self.vaga}: {self.candidato} -  Etapa: {self.etapa}/{self.vaga.qntd_etapas}"
+        return (
+            f"{self.vaga}: {self.candidato} -  Etapa:"
+            f" {self.etapa}/{self.vaga.qntd_etapas}"
+        )

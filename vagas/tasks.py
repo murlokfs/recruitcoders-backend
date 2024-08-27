@@ -19,7 +19,10 @@ def atualizar_vagas_expiradas():
 
     total_vagas_analisadas = Vaga.objects.filter(valido_ate__lte=hoje).count()
 
-    return f"Vagas fechadas: {total_vagas_expiradas} \n Vagas analisadas: {total_vagas_analisadas}"
+    return (
+        f"Vagas fechadas: {total_vagas_expiradas} \n Vagas analisadas:"
+        f" {total_vagas_analisadas}"
+    )
 
 
 @shared_task
