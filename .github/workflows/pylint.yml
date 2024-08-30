@@ -1,4 +1,4 @@
-name: Pylint
+name: Radon
 
 on: [push]
 
@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
+        pip install radon
+    - name: Avaliando a Manutenabilidade do código
       run: |
-        pylint $(git ls-files '*.py')
+        radon mi -s $(git ls-files '*.py')
